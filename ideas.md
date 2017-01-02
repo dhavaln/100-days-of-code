@@ -1,4 +1,4 @@
-## List of ideas that I will be implementing as part of the challenge. Some of these are possible, while some might not be easy to do.
+## List of ideas that I might be implementing as part of the challenge.
 
 * For my SaaS-savvy friend, Export List of Subscribers for a Github Repo
 * For my Wife, Amazon Price Alert
