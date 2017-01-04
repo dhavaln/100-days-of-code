@@ -8,3 +8,8 @@
 
 **Link to work**: [Github Followers](/work/github_followers)
 
+### Day 1: 4th Jan, 2017 (Github Followers) ** Its my Birthday Today **
+
+**Today's Progress**: Restructured the code a bit, sychronized the axios calls to fetch the user detail with email once the followers are loaded. 
+
+**Link to work**: [Github Followers](/work/github_followers)
