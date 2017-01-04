@@ -10,3 +10,6 @@ export const fetchRepoFollowers = (url, page) => {
 	return axios.get(url)
 }
 
+export const fetchUserDetail = (url) => {
+	return axios.get(url)
+}

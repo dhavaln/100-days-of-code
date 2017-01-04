@@ -1,43 +1,8 @@
 import React from 'react';
 import { Form, Icon, Input, Button, Alert, Table } from 'antd';
 const FormItem = Form.Item;
+import RepoForm from './RepoForm';
 
-const RepoForm = Form.create()(React.createClass({
-  handleSubmit(e) {
-    e.preventDefault();
-    this.props.form.validateFields((err, values) => {
-      if (!err) {
-        //console.log('Received values of form: ', values);
-        this.props.fetchRepoDetail(values.user + '/' + values.repo)
-      }
-    });
-  },
-
-  render() {
-    const { getFieldDecorator } = this.props.form;
-    return (
-      <Form inline onSubmit={this.handleSubmit} style={{paddingBottom: '10px'}}>
-        <FormItem>
-          {getFieldDecorator('user', {
-            rules: [{ required: true, message: 'Please input username!' }],
-          })(
-            <Input addonBefore={<Icon type="user" />} placeholder="Username" />
-          )}
-        </FormItem>
-        <FormItem>
-          {getFieldDecorator('repo', {
-            rules: [{ required: true, message: 'Please input repo name' }],
-          })(
-            <Input addonBefore={<Icon type="github" />} placeholder="Repository" />
-          )}
-        </FormItem>
-        <FormItem>
-          <Button type="primary" htmlType="submit">Followers</Button>
-        </FormItem>
-      </Form>
-    );
-  }
-}))
 
 const Error = React.createClass({
 
@@ -50,7 +15,19 @@ const Error = React.createClass({
 })
 
 const Followers = React.createClass({
+  componentDidMount(){
+    console.log('rendering followers');
+    if(!this.props.users[0].email){
+      this.props.fetchUserDetail(this.props.users[0].url, 0);
+    }    
+  },
+
+  componentWillReceiveProps(){
+    console.log('new props received');
+  },
+
   render(){
+    if(!this.props.users) return <div/>;
 
     const columns = [{
       title: 'Name',
@@ -58,8 +35,15 @@ const Followers = React.createClass({
       key: 'login',
       render: text => <a href="#">{text}</a>,
     }, {
-      title: 'Email'      
+      title: 'Email',
+      dataIndex: 'email',
+      key: 'email',
+      render: text => {        
+        return <a href="mailto:#">{text}</a>
+      },
     }];
+
+    this.props.users.map(u => {u.key = u.id});
 
     return <div>
       <Table columns={columns} dataSource={this.props.users} pagination={false}/>
@@ -71,15 +55,14 @@ const RepoDetail = React.createClass({
 
   componentDidMount(){
     if(this.props.repo && !this.props.followers.users){
-      console.log('load followers');
-      this.props.fetchRepoFollowers( this.props.repo.stargazers_url, 0);
+      this.props.fetchRepoFollowers( this.props.repo.stargazers_url);
     }
   },
   
   render(){
     return <div>
       <h2>Followers: {this.props.repo.stargazers_count}</h2>
-      <Followers users={this.props.followers.users} />
+      {this.props.followers.users ? <Followers users={this.props.followers.users} fetchUserDetail={this.props.fetchUserDetail} /> : null}
     </div>
   }
 })
@@ -91,7 +74,7 @@ const Home = React.createClass({
       <div>
         <RepoForm {...this.props} />
         {this.props.repo.loading ? <Icon type='loading' /> : null }
-        {this.props.repo.detail ? <RepoDetail repo={this.props.repo.detail} followers={this.props.followers} fetchRepoFollowers={this.props.fetchRepoFollowers} /> : null }
+        {this.props.repo.detail ? <RepoDetail repo={this.props.repo.detail} followers={this.props.followers} fetchRepoFollowers={this.props.fetchRepoFollowers} fetchUserDetail={this.props.fetchUserDetail} /> : null }
         {this.props.repo.error ? <Error error={this.props.repo.error} /> : null }        
       </div>
     )
