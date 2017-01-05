@@ -14,7 +14,7 @@
 
 **Link to work**: [Github Followers](/work/github_followers)
 
-### Day 2: 5th Jan, 2017 (Github Followers) ** Its my Birthday Today **
+### Day 2: 5th Jan, 2017 (Github Followers)
 
 **Today's Progress**: Restructured the code a bit, loading emails in a sequence, some rendering issue with React but it was expected.
 
