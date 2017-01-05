@@ -14,19 +14,23 @@ function followers(state = defaultState, action){
 
 	switch(action.type){
 		case REPO_DETAIL_FETCH:
-			return {...defaultState};
+			return {...state};
 		case FOLLOWER_DETAIL_FETCH:
-			return {...defaultState, loading: true}
+			return {...state, loading: true}
 		case FOLLOWER_DETAIL_ERROR:
-			return {...defaultState, error: action.message }	
+			return {...state, error: action.message }	
 		case FOLLOWER_DETAIL_LOADED:
-			return {...defaultState, users: action.users}
+			return {...state, users: action.users}
 		case USER_DETAIL_FETCH:
-			return Object.assign({}, state, {users: [...state.users.slice(0, action.index),Object.assign({}, state.users[0], {loading: true}),...state.users.slice(action.index+1)] })
+			return {...state, users: [ 
+				...state.users.slice(0, action.index),
+				Object.assign({}, state.users[0], {loading: true}),
+				...state.users.slice(action.index+1)] 
+			}
 		case USER_DETAIL_ERROR:
-			return Object.assign({}, state, {users: [...state.users.slice(0, action.index),Object.assign({}, state.users[0], {loading: false, error: action.error}),...state.users.slice(action.index+1)] })
+			return {...state, users: [...state.users.slice(0, action.index),Object.assign({}, state.users[0], {loading: false, error: action.error}),...state.users.slice(action.index+1)] }
 		case USER_DETAIL_LOADED:
-			return Object.assign({}, state, {users: [...state.users.slice(0, action.index),Object.assign({}, state.users[0], {...action.detail}),...state.users.slice(action.index+1)] })
+			return {...state, users: [...state.users.slice(0, action.index),Object.assign({}, state.users[0], {loading: false, ...action.detail}),...state.users.slice(action.index+1)] }
 		default:
 			return state;
 	}  

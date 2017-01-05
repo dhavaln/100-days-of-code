@@ -1,16 +1,16 @@
-import React from 'react';
-import { Form, Icon, Input, Button, Alert, Table } from 'antd';
-const FormItem = Form.Item;
+import React from 'react'
+import { Form, Icon, Input, Button, Alert, Table } from 'antd'
+const FormItem = Form.Item
 
 const RepoForm = Form.create()(React.createClass({
   handleSubmit(e) {
-    e.preventDefault();
+    e.preventDefault()
     this.props.form.validateFields((err, values) => {
       if (!err) {
         //console.log('Received values of form: ', values);
         this.props.fetchRepoDetail(values.user + '/' + values.repo)
       }
-    });
+    })
   },
 
   render() {

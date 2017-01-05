@@ -17,7 +17,7 @@ const Main = React.createClass({
         </Layout>
         <Footer>
           <div >
-            Made with <Icon type="heart" /> for <a href="https://twitter.com/hashtag/100daysofcoding?src=hash" target="_blank">#100DaysOfCoding</a>
+            Made with <Icon type="heart" style={{color: 'red'}}/> for <a href="https://twitter.com/hashtag/100daysofcoding?src=hash" target="_blank">#100DaysOfCoding</a>
           </div>
         </Footer>
       </Layout>
