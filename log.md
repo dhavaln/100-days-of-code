@@ -19,3 +19,9 @@
 **Today's Progress**: Restructured the code a bit, loading emails in a sequence, some rendering issue with React but it was expected.
 
 **Link to work**: [Github Followers](/work/github_followers)
+
+### Day 3: 7th Jan, 2017 (Github Followers)
+
+**Today's Progress**: Some bug fixes, and minor chagnes
+
+**Link to work**: [Github Followers](/work/github_followers)
