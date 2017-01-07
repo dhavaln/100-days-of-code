@@ -30,7 +30,12 @@ function followers(state = defaultState, action){
 		case USER_DETAIL_ERROR:
 			return {...state, users: [...state.users.slice(0, action.index),Object.assign({}, state.users[0], {loading: false, error: action.error}),...state.users.slice(action.index+1)] }
 		case USER_DETAIL_LOADED:
-			return {...state, users: [...state.users.slice(0, action.index),Object.assign({}, state.users[0], {loading: false, ...action.detail}),...state.users.slice(action.index+1)] }
+			return {...state, users: [
+				...state.users.slice(0, action.index),
+				Object.assign({}, state.users[0], {loading: false, ...action.detail, hasEmail: !!action.detail.email })
+				,...state.users.slice(action.index+1)
+				] 
+			}
 		default:
 			return state;
 	}  
