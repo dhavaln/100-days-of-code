@@ -22,7 +22,7 @@
 
 ### Day 3: 7th Jan, 2017 (Github Followers)
 
-**Today's Progress**: more debugging less coding...
+**Today's Progress**: Some bug fixes, and minor chagnes
 
 **Link to work**: [Github Followers](/work/github_followers)
 
