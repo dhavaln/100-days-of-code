@@ -7,7 +7,7 @@ export const fetchRepoDetail = (repo) => {
 }
 
 export const fetchRepoFollowers = (url, page) => {
-	return axios.get(url)
+	return axios.get(url + `?page=${page}`)
 }
 
 export const fetchUserDetail = (url) => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Icon, Input, Button, Alert, Table } from 'antd';
+import { Form, Icon, Input, Button, Alert, Table, Card } from 'antd';
 
 export const Follower = React.createClass({
 
@@ -9,13 +9,25 @@ export const Follower = React.createClass({
 
 	render(){
 		console.log('rendering ', this.props.user.id)
-		return <tr>
-			<td><img src={this.props.user.avatar_url} width="30px"/></td>
-			<td>{this.props.user.name || this.props.user.login}</td>
-			<td>
-				{this.props.user.loading ? <Icon type='loading' /> : (this.props.user.hasEmail === false ? 'No Email' : this.props.user.email ) }
-			</td>
-		</tr>
+		return <Card style={{ width: 150, float: 'left', margin: '5px' }} bodyStyle={{ padding: 0 }}>
+		    <div className="custom-image">
+		      <img alt="example" width="150" src={this.props.user.avatar_url} />
+		    </div>
+		    <div className="custom-card">
+		      <h3>{this.props.user.name || this.props.user.login}</h3>
+		      <p>
+		      	{this.props.user.loading ? <Icon type='loading' /> : (this.props.user.hasEmail === false ? 'No Email' : <a href="this.props.user.email">{this.props.user.email}</a> ) }
+		      </p>
+		    </div>
+		  </Card>
+		// return <tr>
+		// 	<td>{this.props.index + 1}</td>
+		// 	<td><img src={this.props.user.avatar_url} width="30px"/></td>
+		// 	<td>{this.props.user.name || this.props.user.login}</td>
+		// 	<td>
+		// 		{this.props.user.loading ? <Icon type='loading' /> : (this.props.user.hasEmail === false ? 'No Email' : <a href="this.props.user.email">{this.props.user.email}</a> ) }
+		// 	</td>
+		// </tr>
 	}
 })
 
@@ -28,10 +40,24 @@ const Followers = React.createClass({
 
   componentDidMount(){
     console.log('rendering followers');
-    if(!this.props.users[this.state.userIndex].email){
-      this.props.fetchUserDetail(this.props.users[this.state.userIndex].url, this.state.userIndex, this.props.users.length);      
-    }    
+    console.log('registering page scroll event listener')
+    document.addEventListener('scroll', this.onScroll)
+
+    // if(!this.props.users[this.state.userIndex].email){
+    //   this.props.fetchUserDetail(this.props.users[this.state.userIndex].url, this.state.userIndex, this.props.users.length);      
+    // }
   },  
+
+  componentWillUnmount(){
+  	console.log('removing the event listener')
+  	document.removeEventListener('scroll', this.onScroll)
+  },
+
+  onScroll(event){
+	if (document.body.scrollHeight ==  document.body.scrollTop + window.innerHeight) {
+	    this.props.onPageBottom();
+	}
+  },
 
   componentWillReceiveProps(){  
   	// console.log('data loaded', this.props.users[0].loading);
@@ -54,18 +80,10 @@ const Followers = React.createClass({
     if(!this.props.users) return <div/>;    
     this.props.users.map(u => {u.key = u.id});
 
-    return <table width="100%">
-    	<thead>
-    	<tr>
-    		<td></td>
-    		<td>User</td>
-    		<td>Email</td>
-    		</tr>
-    	</thead>
-    	<tbody>
-    		{this.props.users.map(user => <Follower user={user} key={user.login}/>)}
-    	</tbody>
-    </table>
+    return <div>    	
+    	{this.props.users.map( (user, index) => <Follower user={user} key={user.login} index={index}/>)}
+    	<div id="view_footer"></div>
+    </div>
   }
 })
 

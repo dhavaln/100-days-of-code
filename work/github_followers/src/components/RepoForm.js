@@ -8,7 +8,7 @@ const RepoForm = Form.create()(React.createClass({
     this.props.form.validateFields((err, values) => {
       if (!err) {
         //console.log('Received values of form: ', values);
-        this.props.fetchRepoDetail(values.user + '/' + values.repo)
+        this.props.fetchRepoDetail(values.user + '/' + values.repo, 1)
       }
     })
   },

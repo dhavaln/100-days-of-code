@@ -6,7 +6,7 @@ const {
 	} = actions;
 
 const defaultState = {
-	loading: false	
+	loading: false
 }
 
 function followers(state = defaultState, action){
@@ -14,13 +14,17 @@ function followers(state = defaultState, action){
 
 	switch(action.type){
 		case REPO_DETAIL_FETCH:
-			return {...state};
+			return {...state, users: undefined}
 		case FOLLOWER_DETAIL_FETCH:
-			return {...state, loading: true}
+			return {...state, loading: true}			
 		case FOLLOWER_DETAIL_ERROR:
 			return {...state, error: action.message }	
 		case FOLLOWER_DETAIL_LOADED:
-			return {...state, users: action.users}
+			if(action.page == 1){
+				return {...state, users: action.users, page: action.page, loading: false}
+			}else{
+				return {...state, users: [...state.users, ...action.users], page: action.page, loading: false}
+			}
 		case USER_DETAIL_FETCH:
 			return {...state, users: [ 
 				...state.users.slice(0, action.index),
