@@ -19,3 +19,15 @@
 **Today's Progress**: Restructured the code a bit, loading emails in a sequence, some rendering issue with React but it was expected.
 
 **Link to work**: [Github Followers](/work/github_followers)
+
+### Day 3: 7th Jan, 2017 (Github Followers)
+
+**Today's Progress**: more debugging less coding...
+
+**Link to work**: [Github Followers](/work/github_followers)
+
+### Day 4: 9th Jan, 2017 (Github Followers)
+
+**Today's Progress**: loading all the followers with infinite scroll
+
+**Link to work**: [Github Followers](/work/github_followers)
