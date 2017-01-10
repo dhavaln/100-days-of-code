@@ -4,7 +4,7 @@ export const USER_DETAIL_FETCH = "USER_DETAIL_FETCH";
 export const USER_DETAIL_ERROR = 'USER_DETAIL_ERROR';
 export const USER_DETAIL_LOADED = 'USER_DETAIL_LOADED';
 
-export const fetchUserDetail = (url, index, max) => (dispatch) => {
+export const fetchUserDetail = (url, index) => (dispatch) => {
 	dispatch({type: USER_DETAIL_FETCH, index});	
     api.fetchUserDetail(url)
     .then(response => {

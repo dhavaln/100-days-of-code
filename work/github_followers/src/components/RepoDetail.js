@@ -26,7 +26,9 @@ const RepoDetail = React.createClass({
       <h2>Followers: {this.props.repo.stargazers_count} | Forks: {this.props.repo.forks_count}</h2>
       {this.props.followers.users ? <Followers users={this.props.followers.users} fetchUserDetail={this.props.fetchUserDetail} onPageBottom={this.onPageBottom}/> : null}
       {this.props.followers.error ? <Error error={this.props.followers.error} /> : null }     
-      {this.props.followers.loading ? <Icon type='loading' /> : null}   
+      {this.props.followers.loading ? <div style={{clear: 'both'}}>
+      	<Icon type='loading'/>
+      </div> : null }
     </div>
   }
 })
