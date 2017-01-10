@@ -31,3 +31,9 @@
 **Today's Progress**: loading all the followers with infinite scroll
 
 **Link to work**: [Github Followers](/work/github_followers)
+
+### Day 5: 10th Jan, 2017 (Github Followers)
+
+**Today's Progress**: Writing bad code is sometimes fun, helps you understand how to make it correct. Big takeout from today's code: redux data normalization and component responsibilities.
+
+**Link to work**: [Github Followers](/work/github_followers)
